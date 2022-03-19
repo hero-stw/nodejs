@@ -1,16 +1,34 @@
 import express from "express";
 import cors from "cors";
-import productRoute from "./routes/product";
 import morgan from "morgan";
+import { readdirSync } from "fs";
+import mongoose from "mongoose";
+import productRoute from "./routes/product";
+import categoryRoute from "./routes/category";
 const app = express();
 
-const PORT = 3001;
+// readdirSync(__dirname + "/routes").forEach((file) => {
+//   import("./routes/" + file)
+//     .then(({ default: router }) => router.default)
+//     .then((router) => {
+//       app.use("/api", router);
+//     });
+// });
 
-app.use("/api", productRoute);
 app.use(cors());
 app.use(morgan("tiny"));
 app.use(express.json());
 
+app.use("/api", productRoute);
+app.use("/api", categoryRoute);
+
+// Connect Database
+mongoose
+  .connect("mongodb://127.0.0.1:27017/nodejs")
+  .then(() => console.log("Connect Successfully"))
+  .catch((err) => console.log(err));
+
+const PORT = 8000;
 app.listen(PORT, () => {
   console.log("Listening....", PORT);
 });

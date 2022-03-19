@@ -1,20 +1,13 @@
 import { Router } from "express";
-import { list, post } from "../controller/product";
-import {
-  getUser,
-  listUser,
-  postUser,
-  updateUser,
-  deleteUser,
-} from "../controller/user";
+import { create, get, list, remove, update } from "../controller/product";
 import { checkAuth } from "../middlewares/checkAuth";
+
 const router = Router();
 
 router.get("/products", checkAuth, list);
-router.post("/products", checkAuth, post);
-router.get("/users", listUser);
-router.post("/users", postUser);
-router.get("/users/:id", getUser);
-router.put("/users/:id", updateUser);
-router.delete("/users/:id", deleteUser);
+router.post("/products", checkAuth, create);
+router.get("/product/:id", checkAuth, get);
+router.delete("/product/:id", checkAuth, remove);
+router.put("/product/:id", checkAuth, update);
+
 export default router;

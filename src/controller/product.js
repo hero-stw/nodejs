@@ -1,19 +1,61 @@
-const dataProduct = [
-  {
-    id: 1,
-    name: "Pro ABC",
-  },
-  {
-    id: 2,
-    name: "Pro DEF",
-  },
-];
-export const list = (req, res) => {
-  res.json(dataProduct);
-  console.log(dataProduct);
+import Product from "../models/products";
+
+export const create = async (req, res) => {
+  try {
+    const product = await new Product(req.body).save();
+    res.json(product);
+  } catch (error) {
+    res.status(400).json({
+      error: "Không thêm được sản phẩm",
+    });
+  }
 };
-export const post = (req, res) => {
-  dataProduct.push(req.body);
-  console.log(dataProduct);
-  res.json(dataProduct);
+export const list = async (req, res) => {
+  try {
+    const products = await Product.find({}).exec();
+    res.json(products);
+  } catch (error) {
+    res.status(400).json({
+      error: "Không có sản phẩm",
+    });
+  }
+};
+
+export const get = async (req, res) => {
+  try {
+    const product = await Product.findOne({ _id: req.params.id }).exec();
+    res.json(product);
+  } catch (error) {
+    res.status(400).json({
+      error: "Không có sản phẩm",
+    });
+  }
+};
+export const remove = async (req, res) => {
+  try {
+    const product = await Product.findOneAndDelete({
+      _id: req.params.id,
+    }).exec();
+    res.json(product);
+  } catch (error) {
+    res.status(400).json({
+      error: "Xóa sản phẩm không thành công",
+    });
+  }
+};
+export const update = async (req, res) => {
+  const condition = { id: req.params.id };
+  const update = req.body;
+  try {
+    const product = await Product.findOneAndUpdate(
+      condition,
+      { $set: update },
+      { new: true }
+    ).exec();
+    res.json(product);
+  } catch (error) {
+    res.status(400).json({
+      error: "Xóa sản phẩm không thành công",
+    });
+  }
 };
