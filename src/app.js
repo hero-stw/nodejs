@@ -7,6 +7,7 @@ import productRoute from "./routes/product";
 import categoryRoute from "./routes/category";
 import authRoute from "./routes/auth";
 import userRoute from "./routes/user";
+import songRoute from "./routes/song";
 const app = express();
 
 // readdirSync(__dirname + "/routes").forEach((file) => {
@@ -24,6 +25,7 @@ app.use(express.json());
 app.use("/api", productRoute);
 app.use("/api", categoryRoute);
 app.use("/api", authRoute);
+app.use("/api", songRoute);
 // app.use("/api", userRoute);
 
 // Connect Database
