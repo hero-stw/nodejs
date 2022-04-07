@@ -17,6 +17,9 @@ const songSchema = new Schema(
       type: Number,
       required: true,
     },
+    image: {
+      type: String,
+    },
   },
   { timestamps: true }
 );

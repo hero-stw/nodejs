@@ -55,3 +55,7 @@ export const deleteSong = async (req, res) => {
     });
   }
 };
+
+export const searchSong = async (req, res) => {
+  
+}

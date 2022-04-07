@@ -1,0 +1,57 @@
+swagger: "2.0"
+info:
+  description: API for Spotify Clone project
+  version: 1.0.1
+  title: "Spotify API Development"
+tags:
+  - name: "songs"
+    description: "Songs api crud operations"
+  - name: "playlists"
+    description: "Playlist interactions"
+  - name: "users"
+    description: "Operations about users"
+paths:
+  /api/songs:
+    get:
+      tags:
+        - "songs"
+      summary: Get all songs
+      responses:
+        "200":
+          description: Lấy sản phẩm thành công
+        "400":
+          description: Không lấy được sản phẩm
+    post:
+      tags:
+        - "songs"
+      summary: Creates a new songs.
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: "#/components/schemas/Song"
+      responses:
+        200:
+          description: Add new song successfully
+        400:
+          description: Add new song failed
+# Models
+components:
+  schemas:
+    Song:
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+          minLength: 5
+        singer:
+          type: string
+        playlist:
+          type: string
+        duration:
+          type: number
+      required:
+        - name
+        - singer
+        - duration
