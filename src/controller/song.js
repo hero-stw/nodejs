@@ -13,7 +13,7 @@ export const getSongs = async (req, res) => {
 
 export const getSong = async (req, res) => {
   try {
-    const song = await Songs.findOne({ id: req.params.id }).exec();
+    const song = await Songs.findOne({ _id: req.params.id }).exec();
     res.status(200).json(song);
   } catch (error) {
     res.status(400).json((err) => {
@@ -46,8 +46,9 @@ export const updateSong = async (req, res) => {
 };
 
 export const deleteSong = async (req, res) => {
+  const condition = { _id: req.params.id };
   try {
-    const song = await Songs.findOneAndDelete(req.params.id);
+    const song = await Songs.findOneAndDelete(condition).exec();
     res.status(200).json(song);
   } catch (error) {
     res.status(400).json((err) => {
@@ -56,6 +57,4 @@ export const deleteSong = async (req, res) => {
   }
 };
 
-export const searchSong = async (req, res) => {
-  
-}
+export const searchSong = async (req, res) => {};
