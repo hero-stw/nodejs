@@ -17,12 +17,12 @@ app.use(cors());
 app.use(morgan("tiny"));
 app.use(express.json());
 
-// app.use("/api", categoryRoute);
+app.use("/api", productRoute);
+app.use("/api", categoryRoute);
 app.use("/api", authRoute);
 app.use("/api", songRoute);
 app.use("/api", playlistRoute);
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerJSDocs));
-// app.use("/api", userRoute);
 
 // Connect Database
 mongoose

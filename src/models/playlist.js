@@ -5,32 +5,39 @@ const playlistSchema = new Schema({
     type: String,
     required: true,
   },
-  images: [
-    {
-      url: {
-        type: String,
-        required: true,
-      },
+  images: {
+    type: Object,
+    properties: {
+      url: String,
     },
-  ],
+  },
   description: {
     type: String,
   },
   owner: {
-    display_name: {
-      type: String,
+    type: Object,
+    properties: {
+      display_name: {
+        type: String,
+      },
+      avatar: {
+        type: String,
+      },
     },
   },
   followers: {
-    total: {
-      type: Number,
-    },
+    type: Number,
   },
   tracks: {
-    total: {
-      type: Number,
+    type: Object,
+    properties: {
+      total: {
+        type: Number,
+      },
+      item: {
+        type: Array,
+      },
     },
-    items: [],
   },
 });
 export default mongoose.model("Playlist", playlistSchema);
