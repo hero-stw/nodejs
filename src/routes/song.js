@@ -19,6 +19,6 @@ router.post("/songs", createSong);
 router.put("/songs/:id", updateSong);
 router.delete("/songs/:id", deleteSong);
 router.get("/songs/paginate/:page/:limit", getAllPerPage);
-router.post("/songs/searchme/:page/:limit", searchWithPagination);
+// router.post("/songs/searchme/:page/:limit", searchWithPagination);
 
 export default router;

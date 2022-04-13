@@ -12,9 +12,21 @@ const productSchema = new Schema(
       type: Number,
       required: true,
     },
+    description: {
+      type: String,
+    },
     category: {
       type: ObjectId,
       ref: "Category",
+    },
+    status: {
+      type: Number,
+    },
+    image: {
+      type: String,
+    },
+    featured: {
+      type: Boolean,
     },
   },
   { timestamps: true }

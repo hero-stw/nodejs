@@ -44,7 +44,7 @@ export const remove = async (req, res) => {
   }
 };
 export const update = async (req, res) => {
-  const condition = { id: req.params.id };
+  const condition = { _id: req.params.id };
   const update = req.body;
   try {
     const product = await Product.findOneAndUpdate(
@@ -55,7 +55,22 @@ export const update = async (req, res) => {
     res.json(product);
   } catch (error) {
     res.status(400).json({
-      error: "Xóa sản phẩm không thành công",
+      error: "Sửa sản phẩm không thành công",
+    });
+  }
+};
+
+export const updateStatus = async (req, res) => {
+  try {
+    const product = await Product.findOneAndUpdate(
+      { _id: req.params.id },
+      { status: req.body.status },
+      { new: true }
+    ).exec();
+    res.json(product);
+  } catch (error) {
+    res.status(400).json({
+      error: "Update trạng thái không thành công",
     });
   }
 };
